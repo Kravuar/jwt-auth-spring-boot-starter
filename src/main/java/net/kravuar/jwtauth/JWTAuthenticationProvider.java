@@ -11,7 +11,7 @@ import java.util.Arrays;
 @RequiredArgsConstructor
 public class JWTAuthenticationProvider implements AuthenticationProvider {
     private final JWTUtils jwtUtils;
-    private final Props.JWTProps jwtProps;
+    private final JWTAuthProps.JWTProps jwtProps;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {

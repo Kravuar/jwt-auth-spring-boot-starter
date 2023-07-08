@@ -2,13 +2,13 @@
   "groups": [
     {
       "name": "jwt-auth",
-      "type": "net.kravuar.jwtauth.Props",
-      "sourceType": "net.kravuar.jwtauth.Props"
+      "type": "net.kravuar.jwtauth.JWTAuthProps",
+      "sourceType": "net.kravuar.jwtauth.JWTAuthProps"
     },
     {
       "name": "jwt-auth.jwt",
-      "type": "net.kravuar.jwtauth.Props$JWTProps",
-      "sourceType": "net.kravuar.jwtauth.Props$JWTProps"
+      "type": "net.kravuar.jwtauth.JWTAuthProps$JWTProps",
+      "sourceType": "net.kravuar.jwtauth.JWTAuthProps$JWTProps"
     }
   ],
   "properties": [

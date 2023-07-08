@@ -7,7 +7,7 @@ import java.util.List;
 
 @ConfigurationProperties("jwt-auth")
 @RequiredArgsConstructor
-public class Props {
+public class JWTAuthProps {
     public final List<String> unauthenticatedServlets;
     public final List<String> corsAllowed;
     public final JWTProps jwt;

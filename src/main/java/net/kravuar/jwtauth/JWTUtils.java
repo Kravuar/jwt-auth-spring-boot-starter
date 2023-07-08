@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class JWTUtils {
     private final Algorithm algorithm;
-    private final Props.JWTProps props;
+    private final JWTAuthProps.JWTProps props;
 
     private Cookie getJWTCookie(User user, String issuer, String cookieName, String path, long expirationTime) {
         var token = JWT.create()

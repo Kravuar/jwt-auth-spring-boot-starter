@@ -34,11 +34,11 @@ import java.util.List;
 @RequiredArgsConstructor
 @EnableMethodSecurity
 @EnableWebSecurity
-@EnableConfigurationProperties(Props.class)
+@EnableConfigurationProperties(JWTAuthProps.class)
 @ConditionalOnProperty(value = "jwt-auth.enabled", havingValue = "true", matchIfMissing = true)
 @ConditionalOnClass({HttpSecurity.class, HttpServletRequest.class})
 public class JWTAuthSpringBootAutoConfiguration {
-    private final Props props;
+    private final JWTAuthProps JWTAuthProps;
 
     @Bean
     @ConditionalOnMissingBean
@@ -54,14 +54,14 @@ public class JWTAuthSpringBootAutoConfiguration {
 
     @Bean
     public JWTUtils jwtUtils(Algorithm algorithm) {
-        return new JWTUtils(algorithm, props.jwt);
+        return new JWTUtils(algorithm, JWTAuthProps.jwt);
     }
 
     @Bean
     @ConditionalOnMissingBean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(props.corsAllowed);
+        configuration.setAllowedOrigins(JWTAuthProps.corsAllowed);
         configuration.setAllowCredentials(true);
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH"));
         configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
@@ -73,7 +73,7 @@ public class JWTAuthSpringBootAutoConfiguration {
     @Bean
     public HttpSecurity httpSecurity(HttpSecurity httpSecurity, AuthenticationManagerBuilder authenticationManagerBuilder, JWTUtils jwtUtils) throws Exception {
         var unauthenticated = new OrRequestMatcher(
-                props.unauthenticatedServlets.stream()
+                JWTAuthProps.unauthenticatedServlets.stream()
                         .map(AntPathRequestMatcher::new)
                         .map(RequestMatcher.class::cast)
                         .toList()
@@ -81,12 +81,12 @@ public class JWTAuthSpringBootAutoConfiguration {
 
         var jwtProvider = new JWTAuthenticationProvider(
                 jwtUtils,
-                props.jwt
+                JWTAuthProps.jwt
         );
         authenticationManagerBuilder.authenticationProvider(jwtProvider);
         var authenticationManager = authenticationManagerBuilder.build();
 
-        var jwtFilter = new JWTAuthFilter(unauthenticated, props.jwt.accessCookieName, authenticationManager);
+        var jwtFilter = new JWTAuthFilter(unauthenticated, JWTAuthProps.jwt.accessCookieName, authenticationManager);
 
         return httpSecurity
                 .sessionManagement(configurer -> configurer
