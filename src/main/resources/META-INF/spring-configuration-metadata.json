@@ -1,0 +1,66 @@
+{
+  "groups": [
+    {
+      "name": "jwt-auth",
+      "type": "net.kravuar.jwtauth.Props",
+      "sourceType": "net.kravuar.jwtauth.Props"
+    },
+    {
+      "name": "jwt-auth.jwt",
+      "type": "net.kravuar.jwtauth.Props$JWTProps",
+      "sourceType": "net.kravuar.jwtauth.Props$JWTProps"
+    }
+  ],
+  "properties": [
+    {
+      "name": "jwt-auth.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Enables or disables the JWT authentication. Defaults to 'true'."
+    },
+    {
+      "name": "jwt-auth.unauthenticated-servlets",
+      "type": "java.util.List<java.lang.String>",
+      "description": "List of servlets to be whitelisted by JWT authentication."
+    },
+    {
+      "name": "jwt-auth.cors-allowed",
+      "type": "java.util.List<java.lang.String>",
+      "description": "List of origins to be whitelisted by default CORS configuration."
+    },
+    {
+      "name": "jwt-auth.jwt.authorities-claim-name",
+      "type": "java.lang.String",
+      "description": "Name of authorities claim within JWT. Defaults to 'authorities'."
+    },
+    {
+      "name": "jwt-auth.jwt.access-cookie-name",
+      "type": "java.lang.String",
+      "description": "Name of access JWT cookie. Defaults to 'access'."
+    },
+    {
+      "name": "jwt-auth.jwt.refresh-cookie-name",
+      "type": "java.lang.String",
+      "description": "Name of refresh JWT cookie. Defaults to 'refresh'."
+    },
+    {
+      "name": "jwt-auth.jwt.access-cookie-path",
+      "type": "java.lang.String",
+      "description": "Path for access JWT cookie. Defaults to '/'."
+    },
+    {
+      "name": "jwt-auth.jwt.refresh-cookie-path",
+      "type": "java.lang.String",
+      "description": "Path for refresh JWT cookie. Defaults to '/auth/refresh'."
+    },
+    {
+      "name": "jwt-auth.jwt.access-token-expiration",
+      "type": "java.lang.Integer",
+      "description": "Expiration time in ms for access JWT. Defaults to 300 (5m)."
+    },
+    {
+      "name": "jwt-auth.jwt.refresh-token-expiration",
+      "type": "java.lang.Integer",
+      "description": "Expiration time in ms for refresh JWT. Defaults to 43200 (12h)."
+    }
+  ]
+}
