@@ -1,4 +1,4 @@
-package net.kravuar.jwtauth;
+package net.kravuar.jwtauth.components;
 
 import lombok.Getter;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
@@ -20,10 +20,9 @@ public class JWTAuthenticationToken extends AbstractAuthenticationToken {
     }
 
     public JWTAuthenticationToken(String jwt, String subject, Collection<? extends GrantedAuthority> authorities) {
-        super(Collections.emptyList());
+        super(authorities);
         this.jwt = jwt;
         this.subject = subject;
-        super.getAuthorities().addAll(authorities);
         this.setAuthenticated(true);
     }
 

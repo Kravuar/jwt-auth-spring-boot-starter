@@ -1,14 +1,14 @@
 {
   "groups": [
     {
-      "name": "jwt-auth",
-      "type": "net.kravuar.jwtauth.JWTAuthProps",
-      "sourceType": "net.kravuar.jwtauth.JWTAuthProps"
+      "name": "jwt-auth.http",
+      "type": "net.kravuar.jwtauth.components.HttpProps",
+      "sourceType": "net.kravuar.jwtauth.components.HttpProps"
     },
     {
       "name": "jwt-auth.jwt",
-      "type": "net.kravuar.jwtauth.JWTAuthProps$JWTProps",
-      "sourceType": "net.kravuar.jwtauth.JWTAuthProps$JWTProps"
+      "type": "net.kravuar.jwtauth.components.JWTProps",
+      "sourceType": "net.kravuar.jwtauth.components.JWTProps"
     }
   ],
   "properties": [
@@ -18,14 +18,24 @@
       "description": "Enables or disables the JWT authentication. Defaults to 'true'."
     },
     {
-      "name": "jwt-auth.unauthenticated-servlets",
+      "name": "jwt-auth.http.unauthenticated-servlets",
       "type": "java.util.List<java.lang.String>",
       "description": "List of servlets to be whitelisted by JWT authentication."
     },
     {
-      "name": "jwt-auth.cors-allowed",
+      "name": "jwt-auth.http.cors-allowed",
       "type": "java.util.List<java.lang.String>",
       "description": "List of origins to be whitelisted by default CORS configuration."
+    },
+    {
+      "name": "jwt-auth.jwt.cookie-prefix",
+      "type": "java.lang.String",
+      "description": "Prefix of JWT cookie value. Defaults to 'Bearer_'."
+    },
+    {
+      "name": "jwt-auth.jwt.issuer",
+      "type": "java.lang.String",
+      "description": "Issuer of JWT. Defaults to 'jwt-auth'."
     },
     {
       "name": "jwt-auth.jwt.authorities-claim-name",

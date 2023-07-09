@@ -1,4 +1,4 @@
-package net.kravuar.jwtauth;
+package net.kravuar.jwtauth.components;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

@@ -1,4 +1,4 @@
-package net.kravuar.jwtauth;
+package net.kravuar.jwtauth.components;
 
 import com.auth0.jwt.exceptions.JWTVerificationException;
 
