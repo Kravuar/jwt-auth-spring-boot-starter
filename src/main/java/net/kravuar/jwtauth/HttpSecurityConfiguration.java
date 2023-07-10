@@ -13,6 +13,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.OrRequestMatcher;
@@ -41,8 +42,8 @@ public class HttpSecurityConfiguration {
         );
     }
 
-    @ConditionalOnMissingBean
     @Bean
+    @ConditionalOnMissingBean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(httpProps.getCorsAllowed());
@@ -55,11 +56,16 @@ public class HttpSecurityConfiguration {
     }
 
     @Bean
+    @ConditionalOnMissingBean
+    public JWTAuthFilter jwtFilter(AuthenticationManager authenticationManager) {
+        AuthenticationSuccessHandler emptySuccessHandler = (request, response, authentication) -> {};
+        return new JWTAuthFilter(unauthenticated, jwtProps.getAccessCookieName(), authenticationManager, emptySuccessHandler);
+    }
+
+    @Bean
     @Scope("prototype")
     @Primary
-    public HttpSecurity httpSecurity(HttpSecurity httpSecurity,  AuthenticationManager authenticationManager) throws Exception {
-        var jwtFilter = new JWTAuthFilter(unauthenticated, jwtProps.getAccessCookieName(), authenticationManager);
-
+    public HttpSecurity httpSecurity(HttpSecurity httpSecurity, JWTAuthFilter jwtFilter) throws Exception {
         return httpSecurity
                 .cors(cors -> cors.configure(httpSecurity))
                 .sessionManagement(configurer -> configurer
