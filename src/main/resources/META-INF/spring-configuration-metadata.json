@@ -38,6 +38,11 @@
       "description": "Issuer of JWT. Defaults to 'jwt-auth'."
     },
     {
+      "name": "jwt-auth.jwt.httpOnly",
+      "type": "java.lang.Boolean",
+      "description": "Whether to make jwt cookies httpOnly. Defaults to true."
+    },
+    {
       "name": "jwt-auth.jwt.authorities-claim-name",
       "type": "java.lang.String",
       "description": "Name of authorities claim within JWT. Defaults to 'authorities'."

@@ -33,7 +33,7 @@ public class JWTUtils {
                 .sign(algorithm);
         var cookie = new Cookie(cookieName, jwtProps.getCookiePrefix() + token);
         cookie.setMaxAge((int) expirationTime);
-        cookie.setHttpOnly(true);
+        cookie.setHttpOnly(jwtProps.getHttpOnly());
         cookie.setPath(path);
         return cookie;
     }
@@ -47,12 +47,12 @@ public class JWTUtils {
 
     public List<Cookie> getDeleteCookies() {
         var refreshCookie = new Cookie(jwtProps.getAccessCookieName(), "deleted");
-        refreshCookie.setHttpOnly(true);
+        refreshCookie.setHttpOnly(jwtProps.getHttpOnly());
         refreshCookie.setMaxAge(0);
         refreshCookie.setPath(jwtProps.getAccessCookiePath());
 
         var accessCookie = new Cookie(jwtProps.getRefreshCookieName(), "deleted");
-        accessCookie.setHttpOnly(true);
+        accessCookie.setHttpOnly(jwtProps.getHttpOnly());
         accessCookie.setMaxAge(0);
         accessCookie.setPath(jwtProps.getRefreshCookiePath());
         return List.of(accessCookie, refreshCookie);

@@ -10,6 +10,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class JWTProps {
     private String cookiePrefix = "Bearer_";
     private String issuer = "jwt-auth";
+    private Boolean httpOnly = true;
     private String authoritiesClaimName = "authorities";
     private String accessCookieName = "access";
     private String accessCookiePath = "/";
