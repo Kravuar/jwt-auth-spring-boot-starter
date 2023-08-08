@@ -11,6 +11,5 @@ import java.util.List;
 @Setter
 @Getter
 public class HttpProps {
-    private List<String> unauthenticatedServlets = new ArrayList<>(List.of("/auth/**"));
-    private List<String> corsAllowed = new ArrayList<>();
+    private List<String> unauthenticatedEndpoints = new ArrayList<>(List.of("/auth/**"));
 }

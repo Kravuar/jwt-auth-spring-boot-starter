@@ -18,14 +18,9 @@
       "description": "Enables or disables the JWT authentication. Defaults to 'true'."
     },
     {
-      "name": "jwt-auth.http.unauthenticated-servlets",
+      "name": "jwt-auth.http.unauthenticated-endpoints",
       "type": "java.util.List<java.lang.String>",
-      "description": "List of servlets to be whitelisted by JWT authentication."
-    },
-    {
-      "name": "jwt-auth.http.cors-allowed",
-      "type": "java.util.List<java.lang.String>",
-      "description": "List of origins to be whitelisted by default CORS configuration."
+      "description": "List of ant matchers to be whitelisted by JWT filter. Defaults to '/auth/**'."
     },
     {
       "name": "jwt-auth.jwt.cookie-prefix",
