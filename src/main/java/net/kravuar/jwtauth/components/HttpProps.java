@@ -10,6 +10,7 @@ import java.util.List;
 @ConfigurationProperties("jwt-auth.http")
 @Setter
 @Getter
-public class HttpProps {
+public class
+HttpProps {
     private List<String> unauthenticatedEndpoints = new ArrayList<>(List.of("/auth/**"));
 }

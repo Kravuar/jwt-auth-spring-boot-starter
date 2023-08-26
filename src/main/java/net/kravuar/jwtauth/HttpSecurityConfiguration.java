@@ -11,7 +11,6 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.OrRequestMatcher;
@@ -36,8 +35,7 @@ public class HttpSecurityConfiguration {
     @Bean
     @ConditionalOnMissingBean
     public JWTAuthFilter jwtFilter(AuthenticationManager authenticationManager) {
-        AuthenticationSuccessHandler emptySuccessHandler = (request, response, authentication) -> {};
-        return new JWTAuthFilter(unauthenticated, jwtProps.getAccessCookieName(), authenticationManager, emptySuccessHandler);
+        return new JWTAuthFilter(unauthenticated, jwtProps.getAccessCookieName(), authenticationManager);
     }
 
     @Bean

@@ -8,7 +8,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.NegatedRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.web.util.WebUtils;
@@ -18,9 +17,8 @@ import java.io.IOException;
 public class JWTAuthFilter extends AbstractAuthenticationProcessingFilter {
     private final String cookieName;
 
-    public JWTAuthFilter(RequestMatcher ignoringMatcher, String cookieName, AuthenticationManager authManager, AuthenticationSuccessHandler authenticationSuccessHandler) {
+    public JWTAuthFilter(RequestMatcher ignoringMatcher, String cookieName, AuthenticationManager authManager) {
         super(new NegatedRequestMatcher(ignoringMatcher));
-        setAuthenticationSuccessHandler(authenticationSuccessHandler);
         setAuthenticationManager(authManager);
         this.cookieName = cookieName;
     }
