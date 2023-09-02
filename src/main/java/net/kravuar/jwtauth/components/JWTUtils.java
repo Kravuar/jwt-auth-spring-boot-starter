@@ -6,7 +6,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import jakarta.servlet.http.Cookie;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Date;
 import java.util.List;
@@ -24,7 +24,7 @@ public class JWTUtils {
                 .build();
     }
 
-    protected Cookie getJWTCookie(User user, String cookieName, String path, long expirationTime) {
+    protected Cookie getJWTCookie(UserDetails user, String cookieName, String path, long expirationTime) {
         var token = JWT.create()
                 .withSubject(user.getUsername())
                 .withExpiresAt(new Date().toInstant().plusSeconds(expirationTime))
@@ -38,7 +38,7 @@ public class JWTUtils {
         return cookie;
     }
 
-    public List<Cookie> getJWTCookies(User user) {
+    public List<Cookie> getJWTCookies(UserDetails user) {
         return List.of(
                 getJWTCookie(user, jwtProps.getAccessCookieName(), jwtProps.getAccessCookiePath(), jwtProps.getAccessTokenExpiration()),
                 getJWTCookie(user, jwtProps.getRefreshCookieName(), jwtProps.getRefreshCookiePath(), jwtProps.getRefreshTokenExpiration())
