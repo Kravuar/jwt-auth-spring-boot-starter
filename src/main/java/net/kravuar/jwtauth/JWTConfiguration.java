@@ -3,10 +3,9 @@ package net.kravuar.jwtauth;
 import com.auth0.jwt.algorithms.Algorithm;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
-import net.kravuar.jwtauth.components.JWTProps;
 import net.kravuar.jwtauth.components.JWTUtils;
+import net.kravuar.jwtauth.components.props.JWTProps;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -16,7 +15,6 @@ import java.security.interfaces.RSAPublicKey;
 
 @Configuration
 @RequiredArgsConstructor
-@EnableConfigurationProperties(JWTProps.class)
 public class JWTConfiguration {
     private final JWTProps jwtProps;
 

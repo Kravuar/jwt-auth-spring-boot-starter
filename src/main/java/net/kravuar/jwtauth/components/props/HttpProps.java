@@ -1,4 +1,4 @@
-package net.kravuar.jwtauth.components;
+package net.kravuar.jwtauth.components.props;
 
 import lombok.Getter;
 import lombok.Setter;

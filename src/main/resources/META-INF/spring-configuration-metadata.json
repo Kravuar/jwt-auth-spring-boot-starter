@@ -2,13 +2,13 @@
   "groups": [
     {
       "name": "jwt-auth.http",
-      "type": "net.kravuar.jwtauth.components.HttpProps",
-      "sourceType": "net.kravuar.jwtauth.components.HttpProps"
+      "type": "net.kravuar.jwtauth.components.props.HttpProps",
+      "sourceType": "net.kravuar.jwtauth.components.props.HttpProps"
     },
     {
       "name": "jwt-auth.jwt",
-      "type": "net.kravuar.jwtauth.components.JWTProps",
-      "sourceType": "net.kravuar.jwtauth.components.JWTProps"
+      "type": "net.kravuar.jwtauth.components.props.JWTProps",
+      "sourceType": "net.kravuar.jwtauth.components.props.JWTProps"
     }
   ],
   "properties": [
@@ -18,14 +18,19 @@
       "description": "Enables or disables the JWT authentication. Defaults to 'true'."
     },
     {
+      "name": "jwt-auth.jwt.jwt-storage-type",
+      "type": "java.lang.String",
+      "description": "Configures jwt storage. Defaults to 'cookie'."
+    },
+    {
       "name": "jwt-auth.http.unauthenticated-endpoints",
       "type": "java.util.List<java.lang.String>",
       "description": "List of ant matchers to be whitelisted by JWT filter. Defaults to '/auth/**'."
     },
     {
-      "name": "jwt-auth.jwt.cookie-prefix",
+      "name": "jwt-auth.jwt.token-prefix",
       "type": "java.lang.String",
-      "description": "Prefix of JWT cookie value. Defaults to 'Bearer_'."
+      "description": "Prefix of JWT value. Defaults to 'Bearer_'."
     },
     {
       "name": "jwt-auth.jwt.issuer",
@@ -33,7 +38,7 @@
       "description": "Issuer of JWT. Defaults to 'jwt-auth'."
     },
     {
-      "name": "jwt-auth.jwt.httpOnly",
+      "name": "jwt-auth.jwt.cookie.httpOnly",
       "type": "java.lang.Boolean",
       "description": "Whether to make jwt cookies httpOnly. Defaults to true."
     },
@@ -43,22 +48,22 @@
       "description": "Name of authorities claim within JWT. Defaults to 'authorities'."
     },
     {
-      "name": "jwt-auth.jwt.access-cookie-name",
+      "name": "jwt-auth.jwt.cookie.access-cookie-name",
       "type": "java.lang.String",
       "description": "Name of access JWT cookie. Defaults to 'access'."
     },
     {
-      "name": "jwt-auth.jwt.refresh-cookie-name",
+      "name": "jwt-auth.jwt.cookie.refresh-cookie-name",
       "type": "java.lang.String",
       "description": "Name of refresh JWT cookie. Defaults to 'refresh'."
     },
     {
-      "name": "jwt-auth.jwt.access-cookie-path",
+      "name": "jwt-auth.jwt.cookie.access-cookie-path",
       "type": "java.lang.String",
       "description": "Path for access JWT cookie. Defaults to '/'."
     },
     {
-      "name": "jwt-auth.jwt.refresh-cookie-path",
+      "name": "jwt-auth.jwt.cookie.refresh-cookie-path",
       "type": "java.lang.String",
       "description": "Path for refresh JWT cookie. Defaults to '/auth/refresh'."
     },

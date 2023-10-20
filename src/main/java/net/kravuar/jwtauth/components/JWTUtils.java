@@ -1,12 +1,12 @@
 package net.kravuar.jwtauth.components;
 
 import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTCreator;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import jakarta.servlet.http.Cookie;
+import net.kravuar.jwtauth.components.props.JWTProps;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Date;
 import java.util.List;
@@ -24,43 +24,21 @@ public class JWTUtils {
                 .build();
     }
 
-    protected Cookie getJWTCookie(UserDetails user, String cookieName, String path, long expirationTime) {
-        var token = JWT.create()
-                .withSubject(user.getUsername())
+    public JWTCreator.Builder getJWTBuilder(String subject, List<? extends GrantedAuthority> authorities, long expirationTime) {
+        return JWT.create()
+                .withSubject(subject)
                 .withExpiresAt(new Date().toInstant().plusSeconds(expirationTime))
-                .withIssuer(jwtProps.getIssuer())
-                .withClaim(jwtProps.getAuthoritiesClaimName(), user.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList())
-                .sign(algorithm);
-        var cookie = new Cookie(cookieName, jwtProps.getCookiePrefix() + token);
-        cookie.setMaxAge((int) expirationTime);
-        cookie.setHttpOnly(jwtProps.getHttpOnly());
-        cookie.setPath(path);
-        return cookie;
+                .withClaim(jwtProps.getAuthoritiesClaimName(), authorities)
+                .withIssuer(jwtProps.getIssuer());
     }
 
-    public List<Cookie> getJWTCookies(UserDetails user) {
-        return List.of(
-                getJWTCookie(user, jwtProps.getAccessCookieName(), jwtProps.getAccessCookiePath(), jwtProps.getAccessTokenExpiration()),
-                getJWTCookie(user, jwtProps.getRefreshCookieName(), jwtProps.getRefreshCookiePath(), jwtProps.getRefreshTokenExpiration())
-        );
-    }
-
-    public List<Cookie> getDeleteCookies() {
-        var refreshCookie = new Cookie(jwtProps.getAccessCookieName(), "deleted");
-        refreshCookie.setHttpOnly(jwtProps.getHttpOnly());
-        refreshCookie.setMaxAge(0);
-        refreshCookie.setPath(jwtProps.getAccessCookiePath());
-
-        var accessCookie = new Cookie(jwtProps.getRefreshCookieName(), "deleted");
-        accessCookie.setHttpOnly(jwtProps.getHttpOnly());
-        accessCookie.setMaxAge(0);
-        accessCookie.setPath(jwtProps.getRefreshCookiePath());
-        return List.of(accessCookie, refreshCookie);
+    public String sign(JWTCreator.Builder builder) {
+        return builder.sign(algorithm);
     }
 
     public DecodedJWT decode(String token) {
-        if (token != null && token.startsWith(jwtProps.getCookiePrefix())) {
-            String trimmed = token.substring(jwtProps.getCookiePrefix().length());
+        if (token != null && token.startsWith(jwtProps.getTokenPrefix())) {
+            String trimmed = token.substring(jwtProps.getTokenPrefix().length());
             return verifier.verify(trimmed);
         } else throw new JWTNotFoundException();
     }

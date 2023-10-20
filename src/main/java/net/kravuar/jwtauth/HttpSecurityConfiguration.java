@@ -1,10 +1,9 @@
 package net.kravuar.jwtauth;
 
-import net.kravuar.jwtauth.components.HttpProps;
+import jakarta.servlet.http.HttpServletRequest;
 import net.kravuar.jwtauth.components.JWTAuthFilter;
-import net.kravuar.jwtauth.components.JWTProps;
+import net.kravuar.jwtauth.components.props.HttpProps;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -16,14 +15,13 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.OrRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
+import java.util.function.Function;
+
 @Configuration
-@EnableConfigurationProperties(HttpProps.class)
 public class HttpSecurityConfiguration {
     private final OrRequestMatcher unauthenticated;
-    private final JWTProps jwtProps;
 
-    public HttpSecurityConfiguration(HttpProps httpProps, JWTProps jwtProps) {
-        this.jwtProps = jwtProps;
+    public HttpSecurityConfiguration(HttpProps httpProps) {
         this.unauthenticated = new OrRequestMatcher(
                 httpProps.getUnauthenticatedEndpoints().stream()
                         .map(AntPathRequestMatcher::new)
@@ -34,8 +32,8 @@ public class HttpSecurityConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public JWTAuthFilter jwtFilter(AuthenticationManager authenticationManager) {
-        return new JWTAuthFilter(unauthenticated, jwtProps.getAccessCookieName(), authenticationManager);
+    public JWTAuthFilter jwtFilter(AuthenticationManager authenticationManager, Function<HttpServletRequest, String> jwtExtractor) {
+        return new JWTAuthFilter(unauthenticated, authenticationManager, jwtExtractor);
     }
 
     @Bean
