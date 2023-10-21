@@ -9,19 +9,17 @@ import org.springframework.security.web.authentication.AbstractAuthenticationPro
 import org.springframework.security.web.util.matcher.NegatedRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
-import java.util.function.Function;
-
 public class JWTAuthFilter extends AbstractAuthenticationProcessingFilter {
-    private final Function<HttpServletRequest, String> jwtExtractor;
+    private final JWTExtractor jwtExtractor;
 
-    public JWTAuthFilter(RequestMatcher ignoringMatcher, AuthenticationManager authManager, Function<HttpServletRequest, String> jwtExtractor) {
+    public JWTAuthFilter(RequestMatcher ignoringMatcher, AuthenticationManager authManager, JWTExtractor jwtExtractor) {
         super(new NegatedRequestMatcher(ignoringMatcher), authManager);
         this.jwtExtractor = jwtExtractor;
     }
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-        var token = new JWTAuthenticationToken(jwtExtractor.apply(request));
+        var token = new JWTAuthenticationToken(jwtExtractor.extract(request));
         return getAuthenticationManager().authenticate(token);
     }
 }

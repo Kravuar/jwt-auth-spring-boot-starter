@@ -61,6 +61,7 @@ To customize default configuration of the Spring Boot JWT Authentication Starter
 
    JWT properties (jwt-auth.jwt):
 
+   - `jwtStorageType`: Configure jwt storage type. By default, it is set to `"cookie"`.
    - `cookiePrefix`: Set the prefix for the JWT cookie. By default, it is set to `"Bearer_"`.
    - `issuer`: Define the issuer value for the JWT. By default, it is set to `"jwt-auth"`.
    - `httpOnly`: Specify whether the JWT cookies should be marked as HTTP-only. By default, it is set to `true`.
@@ -76,4 +77,4 @@ To customize default configuration of the Spring Boot JWT Authentication Starter
 
 3. Replace the default `JWTAuthFilter` bean with a custom bean of the corresponding type if you need additional customization.
 
-4. Replace the default `PrincipalExtractor` bean with a custom bean of type Function<DecodedJWT, Object> that will be used to extract principal into authentication object.
+4. Replace the default `PrincipalExtractor` bean with a custom bean of type PrincipalExtractor that will be used to extract principal into authentication object.

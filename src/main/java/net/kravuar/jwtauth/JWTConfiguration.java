@@ -1,9 +1,11 @@
 package net.kravuar.jwtauth;
 
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.Payload;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import net.kravuar.jwtauth.components.JWTUtils;
+import net.kravuar.jwtauth.components.PrincipalExtractor;
 import net.kravuar.jwtauth.components.props.JWTProps;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
@@ -28,6 +30,12 @@ public class JWTConfiguration {
         var publicKey = (RSAPublicKey) keyPair.getPublic();
         var privateKey = (RSAPrivateKey) keyPair.getPrivate();
         return Algorithm.RSA256(publicKey, privateKey);
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public PrincipalExtractor principalExtractor() {
+        return Payload::getSubject;
     }
 
     @Bean

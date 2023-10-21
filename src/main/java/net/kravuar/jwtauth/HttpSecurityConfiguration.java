@@ -1,7 +1,7 @@
 package net.kravuar.jwtauth;
 
-import jakarta.servlet.http.HttpServletRequest;
 import net.kravuar.jwtauth.components.JWTAuthFilter;
+import net.kravuar.jwtauth.components.JWTExtractor;
 import net.kravuar.jwtauth.components.props.HttpProps;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
@@ -14,8 +14,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.OrRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
-
-import java.util.function.Function;
 
 @Configuration
 public class HttpSecurityConfiguration {
@@ -32,7 +30,7 @@ public class HttpSecurityConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public JWTAuthFilter jwtFilter(AuthenticationManager authenticationManager, Function<HttpServletRequest, String> jwtExtractor) {
+    public JWTAuthFilter jwtFilter(AuthenticationManager authenticationManager, JWTExtractor jwtExtractor) {
         return new JWTAuthFilter(unauthenticated, authenticationManager, jwtExtractor);
     }
 

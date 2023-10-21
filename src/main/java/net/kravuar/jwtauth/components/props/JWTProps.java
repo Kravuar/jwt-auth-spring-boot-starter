@@ -8,7 +8,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @Setter
 @Getter
 public class JWTProps {
-    private String jwtStorageType = "cookie";
     private String tokenPrefix = "Bearer_";
     private String issuer = "jwt-auth";
     private String authoritiesClaimName = "authorities";
