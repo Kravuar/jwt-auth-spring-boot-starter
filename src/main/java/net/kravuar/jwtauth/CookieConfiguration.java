@@ -27,9 +27,12 @@ public class CookieConfiguration {
     @Bean
     @ConditionalOnMissingBean
     public JWTExtractor jwtExtractor() {
-        return request -> WebUtils.getCookie(
-                request,
-                cookieProps.getAccessCookieName()
-        ).getValue();
+        return request -> {
+            var cookie = WebUtils.getCookie(
+                    request,
+                    cookieProps.getAccessCookieName()
+            );
+            return cookie != null ? cookie.getValue() : "";
+        };
     }
 }
