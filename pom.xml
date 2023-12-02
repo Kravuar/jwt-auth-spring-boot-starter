@@ -5,11 +5,11 @@
 
     <groupId>net.kravuar</groupId>
     <artifactId>jwt-auth-spring-boot-starter</artifactId>
-    <version>v0.0.4-snapshot</version>
+    <version>v0.0.5-snapshot</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring.version>3.1.1</spring.version>
+        <spring-boot.version>3.2.0</spring-boot.version>
         <lombok.version>1.18.28</lombok.version>
         <jwt.version>4.4.0</jwt.version>
         <maven.compiler.source>17</maven.compiler.source>
@@ -19,22 +19,22 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
-            <version>${spring.version}</version>
+            <version>${spring-boot.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure-processor</artifactId>
-            <version>${spring.version}</version>
+            <version>${spring-boot.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
-            <version>${spring.version}</version>
+            <version>${spring-boot.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>${spring.version}</version>
+            <version>${spring-boot.version}</version>
         </dependency>
         
         <dependency>

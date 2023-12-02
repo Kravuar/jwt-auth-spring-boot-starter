@@ -4,6 +4,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.Payload;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import net.kravuar.jwtauth.components.JWTAuthenticationProvider;
 import net.kravuar.jwtauth.components.JWTUtils;
 import net.kravuar.jwtauth.components.PrincipalExtractor;
 import net.kravuar.jwtauth.components.props.JWTProps;
@@ -41,5 +42,14 @@ public class JWTConfiguration {
     @Bean
     public JWTUtils jwtUtils(Algorithm algorithm) {
         return new JWTUtils(algorithm, jwtProps);
+    }
+
+    @Bean
+    public JWTAuthenticationProvider jwtAuthenticationProvider(JWTUtils jwtUtils, PrincipalExtractor principalExtractor) {
+        return new JWTAuthenticationProvider(
+                principalExtractor,
+                jwtUtils,
+                jwtProps
+        );
     }
 }

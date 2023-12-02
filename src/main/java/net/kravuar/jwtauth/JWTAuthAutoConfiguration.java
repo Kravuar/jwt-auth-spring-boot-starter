@@ -13,7 +13,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 @ConditionalOnProperty(value = "jwt-auth.enabled", havingValue = "true", matchIfMissing = true)
 @ConditionalOnClass({HttpSecurity.class, HttpServletRequest.class})
 @ConfigurationPropertiesScan(basePackages = "net.kravuar.jwtauth.components.props")
-@Import({JWTConfiguration.class, AuthenticationManagerConfiguration.class, CookieConfiguration.class, HttpSecurityConfiguration.class})
+@Import({JWTConfiguration.class,  CookieConfiguration.class, HttpSecurityConfiguration.class})
 public class JWTAuthAutoConfiguration {
 
 }

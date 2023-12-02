@@ -26,7 +26,7 @@ public class CookieConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public JWTExtractor jwtExtractor() {
+    public JWTExtractor cookieJwtExtractor() {
         return request -> {
             var cookie = WebUtils.getCookie(
                     request,

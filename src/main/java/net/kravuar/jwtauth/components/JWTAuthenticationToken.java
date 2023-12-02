@@ -17,7 +17,6 @@ public class JWTAuthenticationToken extends AbstractAuthenticationToken {
         super(Collections.emptyList());
         this.jwt = jwt;
         this.principal = null;
-        this.setAuthenticated(false);
     }
 
     public JWTAuthenticationToken(DecodedJWT jwt, Object principal, Collection<? extends GrantedAuthority> authorities) {
