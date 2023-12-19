@@ -5,7 +5,7 @@
 
     <groupId>net.kravuar</groupId>
     <artifactId>jwt-auth-spring-boot-starter</artifactId>
-    <version>v0.0.5-snapshot</version>
+    <version>v0.0.5</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

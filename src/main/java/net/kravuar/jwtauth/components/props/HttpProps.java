@@ -12,5 +12,9 @@ import java.util.List;
 @Getter
 public class
 HttpProps {
-    private List<String> unauthenticatedEndpoints = new ArrayList<>(List.of("/auth/**"));
+    private List<String> unauthenticatedPathMatchers = new ArrayList<>(List.of(
+            "/auth/**",
+            "/error/**"
+    ));
+    private List<String> authenticatedPathMatchers = new ArrayList<>(List.of("/auth/refresh"));
 }

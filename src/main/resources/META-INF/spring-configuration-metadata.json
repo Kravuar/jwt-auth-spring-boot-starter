@@ -23,9 +23,14 @@
       "description": "Configures jwt storage. Defaults to 'cookie'."
     },
     {
-      "name": "jwt-auth.http.unauthenticated-endpoints",
+      "name": "jwt-auth.http.unauthenticated-path-matchers",
       "type": "java.util.List<java.lang.String>",
-      "description": "List of ant matchers to be whitelisted by JWT filter. Defaults to '/auth/**'."
+      "description": "List of path matchers to be whitelisted by JWT filter (Can be used in combination with authenticated-path-matchers). Defaults to '/auth/**', 'error/**'."
+    },
+    {
+      "name": "jwt-auth.http.authenticated-path-matchers",
+      "type": "java.util.List<java.lang.String>",
+      "description": "List of path matchers that wont be whitelisted by JWT filter (Can be used in combination with unauthenticated-path-matchers). Defaults to '/auth/**'."
     },
     {
       "name": "jwt-auth.jwt.token-prefix",

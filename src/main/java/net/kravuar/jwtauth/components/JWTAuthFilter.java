@@ -12,7 +12,7 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
 public class JWTAuthFilter extends AbstractAuthenticationProcessingFilter {
     private final JWTExtractor jwtExtractor;
 
-    public JWTAuthFilter(RequestMatcher ignoringMatcher, AuthenticationManager authManager, JWTExtractor jwtExtractor) {
+    public  JWTAuthFilter(RequestMatcher ignoringMatcher, AuthenticationManager authManager, JWTExtractor jwtExtractor) {
         super(new NegatedRequestMatcher(ignoringMatcher), authManager);
         this.jwtExtractor = jwtExtractor;
     }
